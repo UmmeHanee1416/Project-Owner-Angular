@@ -1,0 +1,109 @@
+<figure class="fir-image-figure">
+
+
+
+  <figcaption>
+    <div class="fig-author-figure-title">Welcome {{user.username}}</div>
+    <div class="fig-author-figure-title">{{user.email}}</div>
+  </figcaption>
+
+  <a class="fir-imageover" rel="noopener" [routerLink]='["/login"]' (click)="logout()">
+    <img class="fir-author-image fir-clickcircle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStQY8oE1VY9lE9b_gbtCAqAmS3s7r7LFx-6UNgYNNZ7SGv1OHwwZtopVm1f3lfRSJ4jUI&usqp=CAU" alt="David East - Author">
+    <div class="fir-imageover-color"></div>
+  </a>
+</figure>
+<h1>
+  Projects
+</h1>
+<form action="" [formGroup]="dateForm">
+  <select name="" id="" class="search" (change)="onSelectChange($event)">
+    <option value="" selected disabled>Select One</option>
+<option value="start">By Start Date</option>
+<option value="end">By End Date</option>
+<option value="custom">By Start and End Date</option>
+<option value="all">All</option>
+  </select>
+  <div class="search">
+    <label for="dropdown" *ngIf="expression">* Start Date</label>
+</div>
+<div class="search">
+  <label for="dropdown" *ngIf="fromTo">* From</label>
+</div>
+  <input type="date" class='search' formControlName="startDate">
+  <div class="search">
+    <label for="dropdown" *ngIf="expression">* End Date</label>
+</div>
+<div class="search">
+  <label for="dropdown" *ngIf="fromTo">* To</label>
+</div>
+  <input type="date" class='search' formControlName="endDate">
+  <a class='button' (click)="searchOnDateStart(str)">
+    Search
+  </a>
+</form>
+<a class='button' [routerLink]="['/addProject']">
+ <b>+&nbsp; Add New Project</b> 
+</a>
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Project Name
+        </th>
+        <th>
+          Owner
+        </th>
+        <th>Intro</th>
+        <th>Status</th>
+        <th>Members</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tfoot *ngIf="authorise">
+      <tr>
+        <th colspan='8'>
+          UNAUTHORIZED
+        </th>
+      </tr>
+    </tfoot>
+    <tbody *ngFor="let item of projectList">
+      <tr>
+        <td data-title='Provider Name'>
+          {{item.name}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.ownerName}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.intro}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.status}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.memberNames}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.startDateTime}}
+        </td>
+        <td data-title='E-mail'>
+          {{item.endDateTime}}
+        </td>
+        <td class='select'>
+          <a class='button' [routerLink]="['/listProject']" (click)="goToEdit(item.id,item.owner)">
+            Edit
+          </a>
+          <a class='button' [routerLink]="['/listProject']" (click)="delete(item.id)">
+            Delete
+          </a>
+          <a class='button' [routerLink]="['/listProject']" (click)="gtReport(item.id)">
+            Generate Report
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

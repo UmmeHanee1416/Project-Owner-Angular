@@ -1,0 +1,68 @@
+<header>
+    <div class="text-box">
+        <h1 id="title">CREATE NEW PROJECT!</h1>
+        <hr>
+        <p id="description">Tell us about your amazing project!</p>
+    </div>
+</header>
+<div class="container">
+    <form id="survey-form" method="GET" [formGroup]="projectForm" (ngSubmit)="onsubmit()">
+        <div class="labels">
+            <label id="name-label" for="name" name="name">* Project Name</label>
+        </div>
+        <div class="input-tab">
+            <input class="input-field" type="text" id="name" formControlName="name" placeholder="Enter project name" required>
+        </div>
+        <div class="labels">
+            <label id="email-label" for="email">* Owner</label>
+        </div>
+        <div class="input-tab">
+            <select id="dropdown" formControlName="owner">
+                <option disabled value selected>Select</option>
+                <option *ngFor="let item of userList" value="{{item.userId}}">{{item.username}}</option>
+                
+            </select>
+        </div>
+        <div class="labels">
+            <label for="dropdown">* Members</label>
+        </div>
+        <div class="input-tab">
+            <select id="dropdown" formControlName="members" multiple>
+                <option disabled value selected>Select an option</option>
+                <option *ngFor="let item of userList" value="{{item.userId}}">{{item.username}}</option>
+            </select>
+        </div>
+        <div class="labels">
+            <label>Project Status</label>
+        </div>
+        <div class="input-tab">
+            <input type="radio" formControlName="status" value="pre">Pre<br>
+            <input type="radio" formControlName="status" value="start">Started<br>
+            <input type="radio" formControlName="status" value="end">Ended<br>
+        </div>
+        <div class="labels">
+            <label id="number-label" for="number">* Start date</label>
+        </div>
+        <div class="input-tab">
+            <input class="input-field" type="date" id="startdate" formControlName="startDateTime"
+                required>
+        </div>
+        <div class="labels">
+            <label id="number-label" for="number">* End date</label>
+        </div>
+        <div class="input-tab">
+            <input class="input-field" type="date" id="enddate" formControlName="endDateTime"
+                required>
+        </div>
+        <div class="labels">
+            <label for="comments">Project Description</label>
+        </div>
+        <div class="input-tab">
+            <textarea class="input-field" id="comments" formControlName="intro" rows="3" cols="40"
+                placeholder="Your comments..."></textarea>
+        </div>
+        <div class="btn">
+            <button id="submit" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

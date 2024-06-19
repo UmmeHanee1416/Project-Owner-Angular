@@ -1,0 +1,11 @@
+<div class="login-page">
+    <div class="form">
+      <form [formGroup]="userForm" (ngSubmit)="onsubmit()">
+        <input type="text" placeholder="name" formControlName="username"/>
+        <input type="password" placeholder="password" formControlName="password"/>
+        <input type="text" placeholder="email address" formControlName="email"/>
+        <button type="submit">create</button>
+        <p class="message">Already registered? <a [routerLink]="['/login']">Sign In</a></p>
+      </form>
+    </div>
+  </div>
