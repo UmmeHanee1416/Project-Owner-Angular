@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserServiceService } from 'src/app/services/user-service.service';
 
@@ -22,10 +23,11 @@ export class LoginComponent implements OnInit{
   });
 
   onsubmit() {
-    this.userService.login(this.userForm.value).subscribe((val: any) => {
-      this.userService.saveUser(val);
-      const user = this.userService.getUser();
-      console.log(user.userId);
+    this.userService.login(this.userForm.value).pipe(catchError((err) => {
+      alert("User not found. Please try again!");
+      return throwError(() => err);
+    })).subscribe((resp) => {
+      this.userService.saveUser(resp);
       this.router.navigateByUrl("/listProject");
     })
   }
