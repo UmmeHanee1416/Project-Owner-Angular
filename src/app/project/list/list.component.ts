@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Project } from 'src/app/model/project';
 import { ProjectServiceService } from 'src/app/services/project-service.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -132,5 +133,31 @@ export class ListComponent implements OnInit {
   logout() {
     this.userService.logOut();
     this.router.navigateByUrl("/login");
+  }
+
+  confirmBox(data: any) {
+    Swal.fire({
+      title: 'Are you sure you want to delete ' + data.name + ' ?',
+      text: 'You will not be able to recover it!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete it',
+      cancelButtonText: 'No, Keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.delete(data.id)
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your file is safe!',
+          'error'
+        )
+      }
+    })
   }
 }

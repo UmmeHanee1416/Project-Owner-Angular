@@ -96,7 +96,7 @@
           <a class='button' [routerLink]="['/listProject']" (click)="goToEdit(item.id,item.owner)">
             Edit
           </a>
-          <a class='button' [routerLink]="['/listProject']" (click)="delete(item.id)">
+          <a class='button' [routerLink]="['/listProject']" (click)="confirmBox(item)">
             Delete
           </a>
           <a class='button' [routerLink]="['/listProject']" (click)="gtReport(item.id)">
